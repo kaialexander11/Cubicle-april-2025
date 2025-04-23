@@ -1,8 +1,12 @@
 const router = require('express').Router();
+const cubeManager = require('../managers/cubeManager.js');
 
 router.get('/', (req, res) => {
     //res.send('Hello from Express!');
-    res.render('index');
+    const cubes = cubeManager.getAll();
+
+
+    res.render('index', { cubes });
 });
 
 router.get('/about', (req, res) => {
