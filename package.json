@@ -1,0 +1,26 @@
+{
+  "name": "cubicle-april-2025",
+  "version": "1.0.0",
+  "description": "Course project workshop",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaialexander11/Cubicle-april-2025.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaialexander11/Cubicle-april-2025/issues"
+  },
+  "homepage": "https://github.com/kaialexander11/Cubicle-april-2025#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
