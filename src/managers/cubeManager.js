@@ -2,9 +2,26 @@ const uniqid = require('uniqid');
 //const db = require('../db.json');
 //exports.create = (name, description, difficultyLevel, imageUrl);
 
-const cubes = [];
+const cubes = [
+    {
+        id: '1442imhkkm9u5gide',
+        name: 'Mirror Cube',
+        description: 'Very rare and powerful cube.',
+        imageUrl: 'https://m.media-amazon.com/images/I/71UW7JFigHL.jpg',
+        difficultyLevel: 4
+    },
+    {
+        id: '1432ighkkh9u5gide',
+        name: 'Lemarchands Cube',
+        description: 'Unlimited Force Cube.',
+        imageUrl: 'https://content.propstore.com/auction/hellraiser/listings2/88565/img01.jpg',
+        difficultyLevel: 5
+    },
+];
 
 exports.getAll = () => cubes.slice();
+
+exports.getOne = (cubeId) => cubes.find(x => x.id == cubeId);
 
 exports.create = (cubeData) => {
     //cubes.push(cubeData);
