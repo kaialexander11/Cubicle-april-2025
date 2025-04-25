@@ -23,6 +23,7 @@
   "dependencies": {
     "express": "^5.1.0",
     "express-handlebars": "^8.0.2",
+    "mongoose": "^8.13.3",
     "uniqid": "^5.4.0"
   }
 }
