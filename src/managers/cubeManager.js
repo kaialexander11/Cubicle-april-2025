@@ -1,26 +1,33 @@
-const uniqid = require('uniqid');
+const Cube = require('../models/Cube.js');
+
+//const uniqid = require('uniqid');
+
 //const db = require('../db.json');
 //exports.create = (name, description, difficultyLevel, imageUrl);
 
-const cubes = [
-    {
-        id: '1442imhkkm9u5gide',
-        name: 'Mirror Cube',
-        description: 'Very rare and powerful cube.',
-        imageUrl: 'https://m.media-amazon.com/images/I/71UW7JFigHL.jpg',
-        difficultyLevel: 4
-    },
-    {
-        id: '1432ighkkh9u5gide',
-        name: 'Lemarchands Cube',
-        description: 'Unlimited Force Cube.',
-        imageUrl: 'https://content.propstore.com/auction/hellraiser/listings2/88565/img01.jpg',
-        difficultyLevel: 5
-    },
-];
+// const cubes = [
+//     {
+//         id: '1442imhkkm9u5gide',
+//         name: 'Mirror Cube',
+//         description: 'Very rare and powerful cube.',
+//         imageUrl: 'https://m.media-amazon.com/images/I/71UW7JFigHL.jpg',
+//         difficultyLevel: 4
+//     },
+//     {
+//         id: '1432ighkkh9u5gide',
+//         name: 'Lemarchands Cube',
+//         description: 'Unlimited Force Cube.',
+//         imageUrl: 'https://content.propstore.com/auction/hellraiser/listings2/88565/img01.jpg',
+//         difficultyLevel: 5
+//     },
+// ];
 
-exports.getAll = ( search, from, to ) => {
-    let result = cubes.slice();
+exports.getAll = async ( search, from, to ) => {
+    //let result = cubes.slice();
+    let result = await Cube.find().lean();
+
+
+    // TODO: Use mongoose to filter in the db
 
     if (search) {
         result = result.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()));
@@ -37,17 +44,24 @@ exports.getAll = ( search, from, to ) => {
     return result;
 };
 
-exports.getOne = (cubeId) => cubes.find(x => x.id == cubeId);
+//exports.getOne = (cubeId) => cubes.find(x => x.id == cubeId);
 
-exports.create = (cubeData) => {
+exports.getOne = (cubeId) => Cube.findById(cubeId);
+
+//exports.getOneLean = (cubeId) => this.getOne(cubeId).lean();
+
+exports.create = async (cubeData) => {
     //cubes.push(cubeData);
-    const newCube = {
-        id: uniqid(),
-        ...cubeData,
-    }
+    // const newCube = {
+    //     id: uniqid(),
+    //     ...cubeData,
+    // }
 
-    cubes.push(newCube);
+    const cube = new Cube(cubeData);
 
-    return newCube;
+    await cube.save();
 
+    //cubes.push(newCube);
+
+    return cube;
 };
