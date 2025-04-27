@@ -51,17 +51,20 @@ exports.getOne = (cubeId) => Cube.findById(cubeId);
 //exports.getOneLean = (cubeId) => this.getOne(cubeId).lean();
 
 exports.create = async (cubeData) => {
-    //cubes.push(cubeData);
-    // const newCube = {
-    //     id: uniqid(),
-    //     ...cubeData,
-    // }
 
     const cube = new Cube(cubeData);
 
     await cube.save();
 
-    //cubes.push(newCube);
-
     return cube;
+};
+
+exports.attachAccessory = async (cubeId, accessoryId) => {
+    //return Cube.findByIdAndUpdate(cubeId, {$push: {accessories: accessoryId}});
+
+    const cube = await Cube.findById(cubeId);
+    cube.accessories.push(accessoryId);
+
+    return cube.save();
+
 };
