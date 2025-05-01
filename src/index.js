@@ -1,10 +1,8 @@
-// console.log('Hello from Express!');
+
 
 const express = require('express');
 const mongoose = require('mongoose');
 
-//const handlebars = require('express-handlebars');
-//const path = require('path');
 
 const expressConfig = require('./config/expressConfig.js');
 const handlebarsConfig = require('./config/handlebarsConfig.js');
@@ -24,17 +22,7 @@ dbConnect()
         console.log('DB error: ', err.message);
     });
 
-
 app.use(routes);
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}...`));
 
-
-
-// app.get('/', homeController.getHome);
-
-// require('./config/expressConfig')(app); => valid as the line above!
-
-// Express config (CSS and IMAGES):
-//app.use(express.static(path.resolve(__dirname, 'public'))); => WORKS as the line below!!!
-//app.use(express.static(path.resolve(__dirname, 'public')));
