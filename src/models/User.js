@@ -23,12 +23,11 @@ userSchema.virtual('repeatPassword')
         }
     });
 
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function() {
 
     const hash = await bcrypt.hash(this.password, 10);
 
     this.password = hash;
-    
 });
 
 const User = mongoose.model('User', userSchema);
