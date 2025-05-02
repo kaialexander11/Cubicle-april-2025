@@ -15,6 +15,8 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+// TODO: validate if user exists
+
 
 userSchema.virtual('repeatPassword')
     .set(function(value) {
