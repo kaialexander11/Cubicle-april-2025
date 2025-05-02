@@ -14,8 +14,10 @@ const cubeSchema = new mongoose.Schema({
 
     }],
     owner: {
+
         type: mongoose.Types.ObjectId,
         ref: 'User'
+        
     }
 
 });
