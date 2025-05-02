@@ -1,5 +1,5 @@
 const router = require('express').Router();
-
+//const jwt = require('../lib/jwt');
 const userManager = require('../managers/userManager.js');
 
 router.get('/register', (req, res) => {
@@ -7,11 +7,14 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
+
     const { username, password, repeatPassword } = req.body;
 
     //console.log(req.body);
     
-    await userManager.register({ username, password, repeatPassword });
+    const token = await userManager.register({ username, password, repeatPassword });
+
+    res.cookie('auth', token, { httpOnly: true });
 
     res.redirect('/users/login');
     
@@ -24,10 +27,10 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
 
     const { username, password } = req.body;
+    
+    const token = await userManager.login(username, password);
 
-    const user = await userManager.login(username, password);
-
-    console.log(user);
+    res.cookie('auth', token, { httpOnly: true });
 
     res.redirect('/');
 
