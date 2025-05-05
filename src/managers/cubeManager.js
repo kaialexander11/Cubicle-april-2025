@@ -1,26 +1,6 @@
 const Cube = require('../models/Cube.js');
 
-//const uniqid = require('uniqid');
 
-//const db = require('../db.json');
-//exports.create = (name, description, difficultyLevel, imageUrl);
-
-// const cubes = [
-//     {
-//         id: '1442imhkkm9u5gide',
-//         name: 'Mirror Cube',
-//         description: 'Very rare and powerful cube.',
-//         imageUrl: 'https://m.media-amazon.com/images/I/71UW7JFigHL.jpg',
-//         difficultyLevel: 4
-//     },
-//     {
-//         id: '1432ighkkh9u5gide',
-//         name: 'Lemarchands Cube',
-//         description: 'Unlimited Force Cube.',
-//         imageUrl: 'https://content.propstore.com/auction/hellraiser/listings2/88565/img01.jpg',
-//         difficultyLevel: 5
-//     },
-// ];
 
 exports.getAll = async ( search, from, to ) => {
     //let result = cubes.slice();
@@ -56,15 +36,20 @@ exports.create = async (cubeData) => {
 
     const cube = new Cube(cubeData);
 
-    await cube.save();
+    //await cube.save();
 
-    return cube;
+    return cube.save();
 };
+
+exports.update = (cubeId, cubeData) => Cube.findByIdAndUpdate(cubeId, cubeData);
+
+exports.delete = (cubeId) => Cube.findByIdAndDelete(cubeId);
 
 exports.attachAccessory = async (cubeId, accessoryId) => {
     //return Cube.findByIdAndUpdate(cubeId, {$push: {accessories: accessoryId}});
 
     const cube = await Cube.findById(cubeId);
+
     cube.accessories.push(accessoryId);
 
     return cube.save();
