@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const cubeManager = require('../managers/cubeManager');
-const accessoryManager = require('../managers/accessoryManager');
-const { getDifficultyOptionsViewData } = require('../utils/viewHelpers');
+const cubeManager = require('../managers/cubeManager.js');
+const accessoryManager = require('../managers/accessoryManager.js');
+const { getDifficultyOptionsViewData } = require('../utils/viewHelpers.js');
 
 // Path is /cubes/create:
 
@@ -45,7 +45,10 @@ router.get('/:cubeId/details', async (req, res) => {
         return res.redirect('/404');
     }
 
-    res.render('cube/details', { cube });
+    const isOwner = cube.owner?.toString() === req.user._id;
+
+
+    res.render('cube/details', { cube, isOwner });
 
 });
 
