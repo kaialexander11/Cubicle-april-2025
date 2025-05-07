@@ -1,5 +1,5 @@
-const jwt = require('../lib/jwt');
-const { SECRET } = require('../config/config');
+const jwt = require('../lib/jwt.js');
+const { SECRET } = require('../config/config.js');
 
 
 exports.auth = async (req, res, next) => {
@@ -13,6 +13,8 @@ exports.auth = async (req, res, next) => {
             const decodedToken = await jwt.verify(token, SECRET);
 
             req.user = decodedToken;
+            res.locals.user = decodedToken; 
+            res.locals.isAuthenticated = true;
 
             next();
 
@@ -24,5 +26,12 @@ exports.auth = async (req, res, next) => {
     } else {
         next();
     }
+};
 
-}
+exports.isAuth = (req, res, next) => {
+    if (!req.user) {
+        return res.redirect('/users/login');
+    }
+
+    next();
+};
