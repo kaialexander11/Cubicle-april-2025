@@ -1,6 +1,6 @@
 const router = require('express').Router();
-//const jwt = require('../lib/jwt');
 const userManager = require('../managers/userManager.js');
+//const jwt = require('../lib/jwt');
 
 router.get('/register', (req, res) => {
     res.render('users/register');

@@ -8,13 +8,11 @@ const userSchema = new mongoose.Schema({
 
         type: String,
         required: [true, 'Username is required!'],
-        minLength: [5, 'Password is too short!'],
+        minLength: [5, 'Username is too short!'],
         match: /^[A-Za-z0-9]+$/,
         unique: true,
 
     },
-
-
     password: {
 
         type: String,
@@ -38,21 +36,21 @@ const userSchema = new mongoose.Schema({
 
 // TODO: validate if user exists
 
-
 userSchema.virtual('repeatPassword')
-    .set(function(value) {
-        if (value !== this.password) {
-
+    .set(function(value) {   
+        if (value !== this.password) { 
             throw new mongoose.MongooseError('Password missmatch!');
-            
         }
     });
 
+
+// Hashing the password! 
 userSchema.pre('save', async function() {
 
     const hash = await bcrypt.hash(this.password, 10);
 
     this.password = hash;
+
 });
 
 const User = mongoose.model('User', userSchema);

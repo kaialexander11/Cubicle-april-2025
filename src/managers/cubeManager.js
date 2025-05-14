@@ -1,7 +1,6 @@
 const Cube = require('../models/Cube.js');
 
 
-
 exports.getAll = async ( search, from, to ) => {
     //let result = cubes.slice();
     let result = await Cube.find().lean();
