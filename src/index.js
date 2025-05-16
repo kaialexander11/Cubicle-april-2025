@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 
 const expressConfig = require('./config/expressConfig.js');
 const handlebarsConfig = require('./config/handlebarsConfig.js');
+const errorHandler = require('./middlewares/errorHandlerMiddleware.js');
+
 const dbConnect = require('./config/dbConfig.js');
 const routes = require('./routes.js');
 
@@ -21,6 +23,8 @@ dbConnect()
     });
 
 app.use(routes);
+
+app.use(errorHandler);
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}...`));
 

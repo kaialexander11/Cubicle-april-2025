@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
                 return /^[A-Za-z0-9]+$/.test(value);
             },
             message: `Invalid password characters!`
-            
+
         },
         
         minLength: 8,
