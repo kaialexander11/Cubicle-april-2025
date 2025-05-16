@@ -2,6 +2,7 @@ const router = require('express').Router();
 const cubeManager = require('../managers/cubeManager.js');
 
 router.get('/', async (req, res) => {
+    
     //res.send('Hello from Express!');
     //console.log(req.query);
 

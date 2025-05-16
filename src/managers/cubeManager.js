@@ -5,7 +5,6 @@ exports.getAll = async ( search, from, to ) => {
     //let result = cubes.slice();
     let result = await Cube.find().lean();
 
-
     // TODO: Use mongoose to filter in the db
 
     if (search) {
@@ -27,6 +26,7 @@ exports.getAll = async ( search, from, to ) => {
 //exports.getOne = (cubeId) => cubes.find(x => x.id == cubeId);
 
 exports.getOne = (cubeId) => Cube.findById(cubeId);
+
 exports.getOneWithAccessories = (cubeId) => this.getOne(cubeId).populate('accessories');
 
 //exports.getOneLean = (cubeId) => this.getOne(cubeId).lean();
@@ -38,6 +38,7 @@ exports.create = async (cubeData) => {
     //await cube.save();
 
     return cube.save();
+
 };
 
 exports.update = (cubeId, cubeData) => Cube.findByIdAndUpdate(cubeId, cubeData);
@@ -45,6 +46,7 @@ exports.update = (cubeId, cubeData) => Cube.findByIdAndUpdate(cubeId, cubeData);
 exports.delete = (cubeId) => Cube.findByIdAndDelete(cubeId);
 
 exports.attachAccessory = async (cubeId, accessoryId) => {
+
     //return Cube.findByIdAndUpdate(cubeId, {$push: {accessories: accessoryId}});
 
     const cube = await Cube.findById(cubeId);
